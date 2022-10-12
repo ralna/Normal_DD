@@ -16,8 +16,14 @@ b = randn(m*m,1);
 [x1,flag1,relres1,iter1,resvec1] = pcg(@(x) A'*(T.\(A*x)), b, 1e-6,100, M1);
 %Two level
 [x2,flag2,relres2,iter2,resvec2] = pcg(@(x) A'*(T.\(A*x)), b, 1e-6,100, M2);
-figure
-semilogy(resvec1,'-b');
-hold on; grid on;
-semilogy(resvec2,'--r');
-legend('ASM','two-level')
+
+figure1 = figure;
+axes1 = axes('Parent',figure1);
+hold(axes1,'on');
+semilogy(resvec1,'DisplayName','one-level','LineWidth',2,'Color',[0 0 1]);
+semilogy(resvec2,'DisplayName','two-level','LineWidth',2,'LineStyle','--','Color',[1 0 0]);
+grid(axes1,'on');
+hold(axes1,'off');
+set(axes1,'FontWeight','bold','FontSize',16,'YMinorTick','on','YScale','log');
+legend1 = legend(axes1,'show');
+set(legend1,'FontWeight','bold','FontSize',20,'Location','best');

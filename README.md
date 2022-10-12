@@ -9,6 +9,7 @@ Potentially, the code can be used to test the preconditioner in a prototype code
 This is a proof of concept Matlab code for the two-level additive Schwarz preconditioner for the normal equaiton proposed in [1]
 
 The code requires a Matlab interface for metis 5. Download [metis 5](http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz) and [metismex.c](https://github.com/dgleich/metismex) then compile it on your platform.
+To run the code, the compiled metismex file must be in the MATLAB Path.
 
 ## Running test examples
 ### Normal equation

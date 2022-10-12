@@ -1,7 +1,9 @@
 # Normal_DD
 Preconditioner for Normal Equation Matrix
 ## __IMPORTANT:__
-This code is a proof of concept to demonstrate the effectiveness of the preconditioner proposed in [1] and __SHOULD NOT__ be used otherwise.
+This code is a proof of concept to demonstrate the effectiveness of the preconditioner proposed in [1]. 
+Note that this code may not be efficient as it is purely sequential. Performance can be achieved by using a parallel implementation of the method, see for example the implementation available in [PCHPDDM](https://petsc.org/main/docs/manualpages/PC/PCHPDDM/) in [PETSc](https://petsc.org/release/).
+Potentially, the code can be used to test the preconditioner in a prototype code.
 
 ## Introduction
 This is a proof of concept Matlab code for the two-level additive Schwarz preconditioner for the normal equaiton proposed in [1]
@@ -14,8 +16,11 @@ The file example_normal.m is a script that compares the two-level additive Schwa
 
 The parameters are the following:
 - N: the number of subdomains
-- k: Number of vectors contributed by each subdomain to the coarse space
-- kappa: desired bound on the condition number of the preconditioned matrix
+- k: Number of vectors contributed by each subdomain to the coarse space.
+If kappa is provided and positive, k might be increased sufficiently to achieve 
+a guaranteed upper bound on the condition number. (The best k is problem-dependent. Recommended value is 50, if kappa is negative and 50 is not enough then use double k and so on).
+- kappa: desired bound on the condition number of the preconditioned matrix.
+If kappa is negative, it is ignored. (Recommended value 100 but higher values may be desirable as they lead to faster setup and preconditioner application with certain increase in the iteration count)
 - verbosity: control the information output
 Note: if kappa and k are provided k will be ignored and the code will compute all necessary vectors to satisfy the bound on the condition number
 
@@ -37,8 +42,11 @@ The parameters are the following:
 - N: the number of subdomains
 - shift: the regularization parameter
 - T: the weights (diagonal entries of the (1,1)-block in the augmented system)
-- k: Number of vectors contributed by each subdomain to the coarse space
-- kappa: desired bound on the condition number of the preconditioned matrix
+- k: Number of vectors contributed by each subdomain to the coarse space.
+If kappa is provided and positive, k might be increased sufficiently to achieve 
+a guaranteed upper bound on the condition number. (The best k is problem-dependent. Recommended value is 50, if kappa is negative and 50 is not enough then use double k and so on).
+- kappa: desired bound on the condition number of the preconditioned matrix.
+If kappa is negative, it is ignored. (Recommended value 100 but higher values may be desirable as they lead to faster setup and preconditioner application with certain increase in the iteration count)
 - verbosity: control the information output
 Note: if kappa and k are provided k will be ignored and the code will compute all necessary vectors to satisfy the bound on the condition number
 
